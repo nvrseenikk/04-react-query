@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
@@ -38,10 +38,11 @@ export default function App() {
   const movies = data?.movies ?? [];
   const totalPages = data?.totalPages ?? 0;
 
+useEffect(() => {
   if (isSuccess && movies.length === 0) {
     toast.error("Фильмы по вашему запросу не найдены.");
   }
-
+}, [isSuccess, movies.length]);
   return (
     <div className={styles.app}>
       <Toaster position="top-right" />
